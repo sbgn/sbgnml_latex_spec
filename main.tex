@@ -1,0 +1,50 @@
+\documentclass{sbmlpkgspec}
+%\documentclass[draftspec]{sbmlpkgspec}
+%\frontNotice{\centering This is a working draft of release 1 of the specification for ``sbgnml'' and not a normative document. Please send feedback to the SBGN team using the tracker: \url{https://github.com/sbgn/sbgn/issues}}
+
+\usepackage{upgreek}
+
+\begin{document}
+
+\packageTitle{SBGN Markup Language (`sbgnml')}
+
+\author{\begin{tabular}{l>{\hspace*{15pt}}r}
+Frank T Bergmann  	& \emph{BioQUANT/COS, Heidelberg University, DE}\\
+Tobias Czauderna 	& \emph{Monash University, AU}\\
+Ugur Dogrusoz 	& \emph{Bilkent University, TR}\\
+Adrien Rougny 	& \emph{AIST, JP}\\
+Andreas Dr\"ager 	& \emph{Universit\"at T\"ubingen, DE}\\
+Vasundra Tour\'e 	& \emph{NTNU, NO}\\
+Alexander Mazein    & \emph{University of Luxembourg, LU}\\
+Michael L Blinov  & \emph{University of Connecticut, US}\\
+Augustin Luna 	& \emph{Dana-Farber Cancer Institute, US}\\[8pt]
+\end{tabular}\\
+\href{mailto:sbgn-editors@googlegroups.com}{\sffamily sbgn-editors@googlegroups.com}}
+
+\packageVersion{Version 0.3} 
+\packageVersionDate{\today}
+
+\packageGeneralURL{http://sbgn.org}
+\packageThisVersionURL{http://co.mbine.org/specifications/sbgnml.version-0.3.release-1}
+
+\renewcommand\graphicspath{{logos}}
+
+\newcommand{\fixttspace}{\hspace*{1pt}}
+
+\maketitlepage
+\maketableofcontents
+
+\input{./macros}
+\input{./body}
+
+\appendix
+%\input{./apdx-validation}
+\input{./apdx-validation-small}
+\input{./apdx-render}
+
+
+\input{./acknowledgements}
+
+\bibliography{sbmlpkgspec}
+
+\end{document}

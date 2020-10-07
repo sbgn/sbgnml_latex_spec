@@ -1,0 +1,544 @@
+% -*- TeX-master: "main"; fill-column: 72 -*-
+
+\section{Validation of SBGN documents}
+\label{apdx-validation}
+
+\subsection{Validation and consistency rules}
+\label{validation-rules}
+
+This section summarizes all the conditions that must (or in some cases,
+at least \emph{should}) be true of an SBGN Level~0 Version~2 model that
+uses the \SystemsBiologyGraphicalNotationMarkupLanguagePackage. There are different degrees of
+rule strictness. Formally, the differences are expressed in the
+statement of a rule: either a rule states that a condition \emph{must}
+be true, or a rule states that it \emph{should} be true. Rules of the
+former kind are strict SBGN validation rules---a model encoded in SBGN
+must conform to all of them in order to be considered valid. Rules of
+the latter kind are consistency rules. To help highlight these
+differences, we use the following three symbols next to the rule
+numbers:
+
+\begin{description}
+
+\item[\hspace*{6.5pt}\vSymbol\vsp] A \vSymbolName indicates a
+\emph{requirement} for SBGN conformance. If a model does not follow this
+rule, it does not conform to the
+\SystemsBiologyGraphicalNotationMarkupLanguagePackage specification.
+(Mnemonic intention behind the choice of symbol: ``This must be
+checked.'')
+
+\item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a
+\emph{recommendation} for model consistency. If a model does not follow
+this rule, it is not considered strictly invalid as far as the
+\SystemsBiologyGraphicalNotationMarkupLanguagePackage specification is
+concerned; however, it indicates that the model contains a physical or
+conceptual inconsistency. (Mnemonic intention behind the choice of
+symbol: ``This is a cause for warning.'')
+
+\item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a strong
+recommendation for good modeling practice. This rule is not strictly a
+matter of SBGN encoding, but the recommendation comes from logical
+reasoning. As in the previous case, if a model does not follow this
+rule, it is not strictly considered an invalid SBGN encoding. (Mnemonic
+intention behind the choice of symbol: ``You're a star if you heed
+this.'')
+
+\end{description}
+
+The validation rules listed in the following subsections are all stated
+or implied in the rest of this specification document. They are
+enumerated here for convenience. Unless explicitly stated, all
+validation rules concern objects and attributes specifically defined in
+the \SystemsBiologyGraphicalNotationMarkupLanguagePackage package.
+
+For \notice convenience and brevity, we use the shorthand
+``\token{sbgnml:\-x}'' to stand for an attribute or element name
+\token{x} in the namespace for the
+\SystemsBiologyGraphicalNotationMarkupLanguagePackage package, using
+the namespace prefix \token{sbgnml}. In reality, the prefix string may
+be different from the literal ``\token{sbgnml}'' used here (and indeed,
+it can be any valid XML namespace prefix that the modeler or software
+chooses). We use ``\token{sbgnml:\-x}'' because it is shorter than to
+write a full explanation everywhere we refer to an attribute or element
+in the \SystemsBiologyGraphicalNotationMarkupLanguagePackage namespace.
+
+\subsubsection*{General rules about this package}
+
+\validRule{sbgnml-10101}{To conform to the
+\SystemsBiologyGraphicalNotationMarkupLanguagePackage specification for
+SBGN Level~0 Version~2, an SBGN document must declare \\
+\uri{http://sbgn.org/libsbgn/0.3} as the
+XMLNamespace to use for elements of this package. (Reference: SBGN
+Level~0 Specification for Systems Biology Graphical Notation - Markup
+Language, Version~0 \sec{xml-namespace}.)}
+
+\validRule{sbgnml-10102}{Wherever they appear in an SBGN document,
+elements and attributes from the
+\SystemsBiologyGraphicalNotationMarkupLanguagePackage must use the \\
+\uri{http://sbgn.org/libsbgn/0.3}
+namespace, declaring so either explicitly or implicitly. (Reference:
+SBGN Level~0 Specification for Systems Biology Graphical Notation -
+Markup Language, Version~0 \sec{xml-namespace}.)}
+
+\subsubsection*{General rules about identifiers}
+
+\validRule{sbgnml-10302}{The value of a \token{sbgnml:\-id} must conform
+to the syntax of the  XML Type ID}
+
+\subsubsection*{Rules for the extended \class{SBGN} class}
+
+\validRule{sbgnml-10303}{The value of a \token{sbgnml:\-metaid} must
+conform to the syntax of the XML Type ID}
+
+\validRule{sbgnml-20101}{Invalid namespace declared. (Reference: SBGN
+Level~0 Specification for Systems Biology Graphical Notation - Markup
+Language, Version~0 \sec{primitive-types}.)}
+
+\validRule{sbgnml-20102}{Allowed attributes (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0 \sec{primitive-types}.)}
+
+\subsubsection*{Rules for \class{Point} object}
+
+\validRule{sbgnml-20201}{A \Point object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}.}
+
+\validRule{sbgnml-20202}{A \Point object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations.
+}
+
+\validRule{sbgnml-20203}{A \Point object must have the required
+attributes \token{sbgnml:\-x} and \token{sbgnml:\-y}. No other
+attributes from the SBGN Level~3 Systems Biology Graphical Notation -
+Markup Language namespaces are permitted on a \Point object. (Reference:
+SBGN Level~0 Specification for Systems Biology Graphical Notation -
+Markup Language, Version~0, \sec{point-class}.)}
+
+\validRule{sbgnml-20204}{A \Point object may contain one and only one
+instance of the \SbgnListOfPoints element. No other elements from the SBGN
+Level~3 Systems Biology Graphical Notation - Markup Language namespaces
+are permitted on a \Point object. (Reference: SBGN Level~0 Specification
+for Systems Biology Graphical Notation - Markup Language, Version~0,
+\sec{point-class}.)}
+
+\validRule{sbgnml-20205}{The attribute \token{sbgnml:\-x} on a \Point
+must have a value of data type \token{double}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{point-class}.)}
+
+\validRule{sbgnml-20206}{The attribute \token{sbgnml:\-y} on a \Point
+must have a value of data type \token{double}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{point-class}.)}
+
+
+\subsubsection*{Rules for \class{BBox} object}
+
+\validRule{sbgnml-20301}{A \BBox object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. }
+
+\validRule{sbgnml-20302}{A \BBox object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBGN Level~3 Core namespaces are permitted on a \BBox.
+}
+
+\validRule{sbgnml-20303}{A \BBox object must have the required
+attributes \token{sbgnml:\-x}, \token{sbgnml:\-y},
+\token{sbgnml:\-w} and \token{sbgnml:\-h}. No other attributes
+from the SBGN Level~3 Systems Biology Graphical Notation - Markup
+Language namespaces are permitted on a \BBox object. (Reference: SBGN
+Level~0 Specification for Systems Biology Graphical Notation - Markup
+Language, Version~0, \sec{bbox-class}.)}
+
+\validRule{sbgnml-20304}{The attribute \token{sbgnml:\-x} on a \BBox
+must have a value of data type \token{double}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{bbox-class}.)}
+
+\validRule{sbgnml-20305}{The attribute \token{sbgnml:\-y} on a \BBox
+must have a value of data type \token{double}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{bbox-class}.)}
+
+\validRule{sbgnml-20306}{The attribute \token{sbgnml:\-w} on a \BBox
+must have a value of data type \token{double}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{bbox-class}.)}
+
+\validRule{sbgnml-20307}{The attribute \token{sbgnml:\-h} on a
+\BBox must have a value of data type \token{double}. (Reference: SBGN
+Level~0 Specification for Systems Biology Graphical Notation - Markup
+Language, Version~0, \sec{bbox-class}.)}
+
+
+\subsubsection*{Rules for \class{Label} object}
+
+\validRule{sbgnml-20401}{A \Label object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBGN Level~3 Core namespaces are permitted on a
+\Label. }
+
+\validRule{sbgnml-20402}{A \Label object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBGN Level~3 Core namespaces are permitted on a \Label.
+}
+
+\validRule{sbgnml-20403}{A \Label object must have the required
+attribute \token{sbgnml:\-text}, and may have the optional attribute
+\token{sbgnml:\-id}. No other attributes from the SBGN Level~3 Systems
+Biology Graphical Notation - Markup Language namespaces are permitted on
+a \Label object. (Reference: SBGN Level~0 Specification for Systems
+Biology Graphical Notation - Markup Language, Version~0,
+\sec{label-class}.)}
+
+\validRule{sbgnml-20404}{A \Label object may contain one and only one
+instance of the BBox element. No other elements from the SBGN Level~3
+Systems Biology Graphical Notation - Markup Language namespaces are
+permitted on a \Label object. (Reference: SBGN Level~0 Specification for
+Systems Biology Graphical Notation - Markup Language, Version~0,
+\sec{label-class}.)}
+
+\validRule{sbgnml-20405}{The attribute \token{sbgnml:\-text} on a \Label
+must have a value of data type \token{string}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{label-class}.)}
+
+\validRule{sbgnml-20406}{The attribute \token{sbgnml:\-id} on a \Label
+must have a value of XML data type \token{ID}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{label-class}.)}
+
+
+\subsubsection*{Rules for \class{Map} object}
+
+\validRule{sbgnml-20501}{A \Map object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBGN Level~3 Core namespaces are permitted on a
+\Map. }
+
+\validRule{sbgnml-20502}{A \Map object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBGN Level~3 Core namespaces are permitted on a \Map.
+}
+
+\validRule{sbgnml-20503}{A \Map object must have the required attribute
+\token{sbgnml:\-language}, and may have the optional attribute
+\token{sbgnml:\-id}. No other attributes from the SBGN Level~3 Systems
+Biology Graphical Notation - Markup Language namespaces are permitted on
+a \Map object. (Reference: SBGN Level~0 Specification for Systems
+Biology Graphical Notation - Markup Language, Version~0,
+\sec{map-class}.)}
+
+\validRule{sbgnml-20504}{A \Map object may contain one and only one
+instance of each of the BBox, \SbgnListOfGlyphs, \SbgnListOfArcs and
+\SbgnListOfArcGroups elements. No other elements from the SBGN Level~3
+Systems Biology Graphical Notation - Markup Language namespaces are
+permitted on a \Map object. (Reference: SBGN Level~0 Specification for
+Systems Biology Graphical Notation - Markup Language, Version~0,
+\sec{map-class}.)}
+
+\validRule{sbgnml-20505}{The value of the attribute
+\token{sbgnml:\-language} of a \Map object must conform to the syntax of
+SBGN data type \primtype{Language} and may only take on the allowed
+values of \primtype{Language} defined in SBGN; that is, the value must
+be one of the following: \val{process description}, \val{entity
+relationship}, \val{activity flow} or \val{invalid Language value}.
+(Reference: SBGN Level~0 Specification for Systems Biology Graphical
+Notation - Markup Language, Version~0, \sec{map-class}.)}
+
+\validRule{sbgnml-20506}{The attribute \token{sbgnml:\-id} on a \Map
+must have a value of XML data type \token{ID}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{map-class}.)}
+
+
+\subsubsection*{Rules for \class{Document} object}
+
+\validRule{sbgnml-20601}{A \Document object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBGN Level~3 Core namespaces are permitted on a
+\Document. }
+
+\validRule{sbgnml-20602}{A \Document object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBGN Level~3 Core namespaces are permitted on a \Document.
+}
+
+\validRule{sbgnml-20603}{A \Document object must contain one and only
+one instance of the Map element. No other elements from the SBGN Level~3
+Systems Biology Graphical Notation - Markup Language namespaces are
+permitted on a \Document object. (Reference: SBGN Level~0 Specification
+for Systems Biology Graphical Notation - Markup Language, Version~0,
+\sec{document-class}.)}
+
+
+\subsubsection*{Rules for \class{Glyph} object}
+
+\validRule{sbgnml-20701}{A \Glyph object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBGN Level~3 Core namespaces are permitted on a
+\Glyph. }
+
+\validRule{sbgnml-20702}{A \Glyph object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBGN Level~3 Core namespaces are permitted on a \Glyph.
+}
+
+\validRule{sbgnml-20703}{A \Glyph object must have the required
+attributes \token{sbgnml:\-id} and \token{sbgnml:\-class}, and may have
+the optional attributes \token{sbgnml:\-compartmentRef},
+\token{sbgnml:\-compartmentOrder} and \token{sbgnml:\-orientation}. No
+other attributes from the SBGN Level~3 Systems Biology Graphical
+Notation - Markup Language namespaces are permitted on a \Glyph object.
+(Reference: SBGN Level~0 Specification for Systems Biology Graphical
+Notation - Markup Language, Version~0, \sec{glyph-class}.)}
+
+\validRule{sbgnml-20704}{A \Glyph object must contain one and only one
+instance of the BBox element, and may contain one and only one instance
+of each of the Label, State, Glyph, Callout, Entity, \SbgnListOfGlyphs and
+\SbgnListOfPorts elements. No other elements from the SBGN Level~3 Systems
+Biology Graphical Notation - Markup Language namespaces are permitted on
+a \Glyph object. (Reference: SBGN Level~0 Specification for Systems
+Biology Graphical Notation - Markup Language, Version~0,
+\sec{glyph-class}.)}
+
+\validRule{sbgnml-20705}{The attribute \token{sbgnml:\-id} on a \Glyph
+must have a value of XML data type \token{ID}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{glyph-class}.)}
+
+\validRule{sbgnml-20706}{The attribute \token{sbgnml:\-class} on a
+\Glyph must have a value of data type \token{string}. (Reference: SBGN
+Level~0 Specification for Systems Biology Graphical Notation - Markup
+Language, Version~0, \sec{glyph-class}.)}
+
+\validRule{sbgnml-20707}{The value of the attribute
+\token{sbgnml:\-compartmentRef} of a \Glyph object must be the 'metaid'
+of an existing \SbgnBase object defined in the enclosing \Model object.
+(Reference: SBGN Level~0 Specification for Systems Biology Graphical
+Notation - Markup Language, Version~0, \sec{glyph-class}.)}
+
+\validRule{sbgnml-20708}{The attribute \token{sbgnml:\-compartmentOrder}
+on a \Glyph must have a value of data type \token{double}. (Reference:
+SBGN Level~0 Specification for Systems Biology Graphical Notation -
+Markup Language, Version~0, \sec{glyph-class}.)}
+
+\validRule{sbgnml-20709}{The value of the attribute
+\token{sbgnml:\-orientation} of a \Glyph object must conform to the
+syntax of SBGN data type \primtype{Orientation} and may only take on the
+allowed values of \primtype{Orientation} defined in SBGN; that is, the
+value must be one of the following: \val{horizontal}, \val{vertical},
+\val{left}, \val{right}, \val{up}, \val{down} or \val{invalid
+Orientation value}. (Reference: SBGN Level~0 Specification for Systems
+Biology Graphical Notation - Markup Language, Version~0,
+\sec{glyph-class}.)}
+
+
+\subsubsection*{Rules for \class{Port} object}
+
+\validRule{sbgnml-20801}{A \Port object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBGN Level~3 Core namespaces are permitted on a
+\Port. }
+
+\validRule{sbgnml-20802}{A \Port object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBGN Level~3 Core namespaces are permitted on a \Port.
+}
+
+\validRule{sbgnml-20803}{A \Port object must have the required
+attributes \token{sbgnml:\-id}, \token{sbgnml:\-x} and
+\token{sbgnml:\-y}. No other attributes from the SBGN Level~3 Systems
+Biology Graphical Notation - Markup Language namespaces are permitted on
+a \Port object. (Reference: SBGN Level~0 Specification for Systems
+Biology Graphical Notation - Markup Language, Version~0,
+\sec{port-class}.)}
+
+\validRule{sbgnml-20804}{The attribute \token{sbgnml:\-id} on a \Port
+must have a value of XML data type \token{ID}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{port-class}.)}
+
+\validRule{sbgnml-20805}{The attribute \token{sbgnml:\-x} on a \Port
+must have a value of data type \token{double}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{port-class}.)}
+
+\validRule{sbgnml-20806}{The attribute \token{sbgnml:\-y} on a \Port
+must have a value of data type \token{double}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{port-class}.)}
+
+
+\subsubsection*{Rules for \class{Arc} object}
+
+\validRule{sbgnml-20901}{An \Arc object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBGN Level~3 Core namespaces are permitted on an
+\Arc. }
+
+\validRule{sbgnml-20902}{An \Arc object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBGN Level~3 Core namespaces are permitted on an \Arc.
+}
+
+\validRule{sbgnml-20903}{An \Arc object must have the required
+attributes \token{sbgnml:\-id}, \token{sbgnml:\-class},
+\token{sbgnml:\-source} and \token{sbgnml:\-target}. No other attributes
+from the SBGN Level~3 Systems Biology Graphical Notation - Markup
+Language namespaces are permitted on an \Arc object. (Reference: SBGN
+Level~0 Specification for Systems Biology Graphical Notation - Markup
+Language, Version~0, \sec{arc-class}.)}
+
+\validRule{sbgnml-20904}{An \Arc object must contain one and only one
+instance of each of the Point and \Point elements, and may contain one
+and only one instance of each of the \SbgnListOfGlyphs, \SbgnListOfPoints and
+\SbgnListOfPorts elements. No other elements from the SBGN Level~3 Systems
+Biology Graphical Notation - Markup Language namespaces are permitted on
+an \Arc object. (Reference: SBGN Level~0 Specification for Systems
+Biology Graphical Notation - Markup Language, Version~0,
+\sec{arc-class}.)}
+
+\validRule{sbgnml-20905}{The attribute \token{sbgnml:\-id} on an \Arc
+must have a value of XML data type \token{ID}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{arc-class}.)}
+
+\validRule{sbgnml-20906}{The attribute \token{sbgnml:\-class} on an \Arc
+must have a value of data type \token{string}. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{arc-class}.)}
+
+\validRule{sbgnml-20907}{The value of the attribute
+\token{sbgnml:\-source} of an \Arc object must be the 'metaid' of an
+existing \SbgnBase object defined in the enclosing \Model object.
+(Reference: SBGN Level~0 Specification for Systems Biology Graphical
+Notation - Markup Language, Version~0, \sec{arc-class}.)}
+
+\validRule{sbgnml-20908}{The value of the attribute
+\token{sbgnml:\-target} of an \Arc object must be the 'metaid' of an
+existing \SbgnBase object defined in the enclosing \Model object.
+(Reference: SBGN Level~0 Specification for Systems Biology Graphical
+Notation - Markup Language, Version~0, \sec{arc-class}.)}
+
+
+\subsubsection*{Rules for \class{State} object}
+
+\validRule{sbgnml-21001}{A \State object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBGN Level~3 Core namespaces are permitted on a
+\State. }
+
+\validRule{sbgnml-21002}{A \State object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBGN Level~3 Core namespaces are permitted on a \State.
+}
+
+\validRule{sbgnml-21003}{A \State object may have the optional
+attributes \token{sbgnml:\-variable} and \token{sbgnml:\-value}. No
+other attributes from the SBGN Level~3 Systems Biology Graphical
+Notation - Markup Language namespaces are permitted on a \State object.
+(Reference: SBGN Level~0 Specification for Systems Biology Graphical
+Notation - Markup Language, Version~0, \sec{state-class}.)}
+
+\validRule{sbgnml-21004}{The attribute \token{sbgnml:\-variable} on a
+\State must have a value of data type \token{string}. (Reference: SBGN
+Level~0 Specification for Systems Biology Graphical Notation - Markup
+Language, Version~0, \sec{state-class}.)}
+
+\validRule{sbgnml-21005}{The attribute \token{sbgnml:\-value} on a
+\State must have a value of data type \token{string}. (Reference: SBGN
+Level~0 Specification for Systems Biology Graphical Notation - Markup
+Language, Version~0, \sec{state-class}.)}
+
+
+\subsubsection*{Rules for \class{Callout} object}
+
+\validRule{sbgnml-21101}{A \Callout object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBGN Level~3 Core namespaces are permitted on a
+\Callout. }
+
+\validRule{sbgnml-21102}{A \Callout object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBGN Level~3 Core namespaces are permitted on a \Callout.
+}
+
+\validRule{sbgnml-21103}{A \Callout object may have the optional
+attribute \token{sbgnml:\-target}. No other attributes from the SBGN
+Level~3 Systems Biology Graphical Notation - Markup Language namespaces
+are permitted on a \Callout object. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{callout-class}.)}
+
+\validRule{sbgnml-21104}{A \Callout object must contain one and only one
+instance of the Point element. No other elements from the SBGN Level~3
+Systems Biology Graphical Notation - Markup Language namespaces are
+permitted on a \Callout object. (Reference: SBGN Level~0 Specification
+for Systems Biology Graphical Notation - Markup Language, Version~0,
+\sec{callout-class}.)}
+
+\validRule{sbgnml-21105}{The value of the attribute
+\token{sbgnml:\-target} of a \Callout object must be the 'metaid' of an
+existing \SbgnBase object defined in the enclosing \Model object.
+(Reference: SBGN Level~0 Specification for Systems Biology Graphical
+Notation - Markup Language, Version~0, \sec{callout-class}.)}
+
+
+\subsubsection*{Rules for \class{Entity} object}
+
+\validRule{sbgnml-21201}{An \Entity object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBGN Level~3 Core namespaces are permitted on an
+\Entity. }
+
+\validRule{sbgnml-21202}{An \Entity object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBGN Level~3 Core namespaces are permitted on an \Entity.
+}
+
+\validRule{sbgnml-21203}{An \Entity object must have the required
+attribute \token{sbgnml:\-name}. No other attributes from the SBGN
+Level~3 Systems Biology Graphical Notation - Markup Language namespaces
+are permitted on an \Entity object. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{entity-class}.)}
+
+\validRule{sbgnml-21204}{The attribute \token{sbgnml:\-name} on an
+\Entity must have a value of data type \token{string}. (Reference: SBGN
+Level~0 Specification for Systems Biology Graphical Notation - Markup
+Language, Version~0, \sec{entity-class}.)}
+
+
+\subsubsection*{Rules for \class{ArcGroup} object}
+
+\validRule{sbgnml-21301}{An \ArcGroup object may have the optional SBGN
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBGN Level~3 Core namespaces are permitted on an
+\ArcGroup. }
+
+\validRule{sbgnml-21302}{An \ArcGroup object may have the optional SBGN
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBGN Level~3 Core namespaces are permitted on an \ArcGroup.
+}
+
+\validRule{sbgnml-21303}{An \ArcGroup object may have the optional
+attribute \token{sbgnml:\-class}. No other attributes from the SBGN
+Level~3 Systems Biology Graphical Notation - Markup Language namespaces
+are permitted on an \ArcGroup object. (Reference: SBGN Level~0
+Specification for Systems Biology Graphical Notation - Markup Language,
+Version~0, \sec{arcgroup-class}.)}
+
+\validRule{sbgnml-21304}{An \ArcGroup object may contain one and only
+one instance of each of the \SbgnListOfGlyphs and \SbgnListOfArcs elements. No
+other elements from the SBGN Level~3 Systems Biology Graphical Notation
+- Markup Language namespaces are permitted on an \ArcGroup object.
+(Reference: SBGN Level~0 Specification for Systems Biology Graphical
+Notation - Markup Language, Version~0, \sec{arcgroup-class}.)}
+
+\validRule{sbgnml-21305}{The attribute \token{sbgnml:\-class} on an
+\ArcGroup must have a value of data type \token{string}. (Reference:
+SBGN Level~0 Specification for Systems Biology Graphical Notation -
+Markup Language, Version~0, \sec{arcgroup-class}.)}
+
+

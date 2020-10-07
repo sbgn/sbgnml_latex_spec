@@ -1,0 +1,94 @@
+\documentclass{jib}
+\newlength{\platz}
+\setlength{\platz}{15pt}
+\RequirePackage{listings}
+
+%\usepackage{changepage} %test, TODO remove
+
+\lstset{%
+  basicstyle=\ttfamily,
+  fontadjust,
+  flexiblecolumns=true,
+  frame=L,
+  xleftmargin=15pt,
+  framesep=5pt,
+  emphstyle=\rmfamily\itshape}
+  
+
+\usepackage{pdfpages}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% JIB Header/Footer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\jibvolume{XX} % insert volume
+\jibissue{X}   % insert issue
+\jibpages{XXX} % insert article ID
+\jibyear{XXXX} % insert year
+\makeHeaderFooter{} % leave as is
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Title Page
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{jibtitlepage}
+
+\jibtitle{Systems Biology Graphical Notation Markup Language (SBGNML) \\ Version 0.3}
+
+
+% We did not provide author(s) nor author footnote(s), please complete as applicable.
+% Please make sure to use unique footnote characters for each author
+\jibauthor{Frank T Bergmann\iref[,]{bergmann},
+           Tobias Czauderna\iref{tobias},
+           Ugur Dogrusoz\iref[,]{ugur1}\iref{ugur2},
+           Adrien Rougny\iref[,]{adrien1}\iref{adrien2},
+           Andreas~Dr\"ager\iref[,]{andreas1}\iref[,]{andreas2}\iref{andreas3},
+           Vasundra Tour\'e\iref[,]{vasundra},
+           Alexander Mazein\iref[,]{mazein1},
+           Michael L Blinov\iref{michael},
+           Augustin Luna\iref[,]{augustin1}\iref{augustin2}\jibauthorfootnote{*}{To whom correspondence should be addressed. Email: \email{sbgn-editors@googlegroups.com}}
+}
+
+% This list is not automatically sorted; sort manually
+\addjibinstitution{bergmann}{BioQUANT/COS, Heidelberg University, INF 267, 69120 Heidelberg, Germany}
+\addjibinstitution{tobias}{Faculty of Information Technology, Monash University, Melbourne, Australia}
+\addjibinstitution{ugur1}{Computer Engineering Department, Bilkent University, Ankara 06800, Turkey}
+\addjibinstitution{ugur2}{i-Vis Research Lab, Bilkent University, Ankara 06800, Turkey}
+\addjibinstitution{adrien1}{Biotechnology Research Institute for Drug Discovery, AIST, Tokyo 135-0064, Japan}
+\addjibinstitution{adrien2}{Computational Bio Big-Data Open Innovation Laboratory (CBBD-OIL), AIST, Tokyo 169-8555, Japan}
+\addjibinstitution{andreas1}{Computational Systems Biology of Infection and Antimicrobial-Resistant Pathogens, Institute for Bioinformatics and Medical Informatics (IBMI), 72076 T\"ubingen, Germany}
+\addjibinstitution{andreas2}{Department of Computer Science, University of T\"ubingen, 72076 T\"ubingen, Germany}
+\addjibinstitution{andreas3}{German Center for Infection Research (DZIF), partner site T\"ubingen}
+\addjibinstitution{vasundra}{Department of Biology, Norwegian University of Science and Technology (NTNU), Trondheim, Norway}
+\addjibinstitution{mazein1}{Luxembourg Centre for Systems Biomedicine, University of Luxembourg, 6 Avenue du Swing, L-4367 Belvaux, Luxembourg}
+%\addjibinstitution{stuart}{Eight Pillars Ltd, 19 Redford Walk, Edinburgh EH13 0AG, UK}
+%\addjibinstitution{irina}{European Institute for Systems Biology and Medicine, CIRI UMR5308, CNRS-ENS-UCBL-INSERM, Université de Lyon, 50 Avenue Tony Garnier, 69007 Lyon, France}
+%\addjibinstitution{hanna}{Department of Computer and Information Science, University of Konstanz, Konstanz, Germany}
+\addjibinstitution{michael}{Center for Cell Analysis and Modeling, UConn Health, USA}
+%\addjibinstitution{michael}{University of Connecticut, US}
+%\addjibinstitution{alice}{Freelance IT Consultant, UK}
+%\addjibinstitution{robin}{Ontario Institute for Cancer Research, MaRS Centre, Toronto, Ontario, Canada}
+%\addjibinstitution{emek1}{Computational Biology Program, Oregon Health \& Science University, Portland, Oregon, USA}
+%\addjibinstitution{emek2}{Department of Molecular and Medical Genetics, Oregon Health \& Science University, Portland, Oregon, USA}
+%\addjibinstitution{huaiyu}{Division of Bioinformatics, Department of Preventive Medicine, University of Southern California, Los Angeles, CA 90033, USA}
+%\addjibinstitution{anatoly}{Institute of Cell Biophysics, Russian Academy of Sciences, 3 Institutskaya Street, Pushchino, Moscow Region, 142290, Russia}
+\addjibinstitution{augustin1}{cBio Center, Department of Data Sciences, Dana-Farber Cancer Institute, Boston, MA 02215, USA}
+\addjibinstitution{augustin2}{Department of Cell Biology, Harvard Medical School, Boston, MA 02115, USA}
+
+\end{jibtitlepage}
+
+
+\begin{abstract}
+This document defines Version 0.3 Markup Language (ML) support for the \textbf{S}ystems \textbf{B}iology \textbf{G}raphical \textbf{N}otation (SBGN), a set of three complementary visual languages developed for biochemists, modelers, and computer scientists. SBGN aims at representing networks of biochemical interactions in a standard, unambiguous way to foster efficient and accurate representation, visualization, storage, exchange and reuse of information on all kinds of biological knowledge, from gene regulation, to metabolism, to cellular signaling. SBGN is defined neutrally to programming languages and software encoding; however, it is oriented primarily towards allowing models to be encoded using XML, the eXtensible Markup Language. The notable changes from the previous version include the addition of attributes for better specify metadata about maps, as well as support for multiple maps, sub-maps, colors, and annotations. These changes enable a more efficient exchange of data to other commonly used systems biology formats (e.g., BioPAX and SBML) and between tools supporting SBGN (e.g., CellDesigner, Newt, Krayon, SBGN-ED, STON, cd2sbgnml, and MINERVA). More details on SBGN and related software are available at http://sbgn.org. With this effort, we hope to increase the adoption of SBGN in bioinformatics tools, ultimately enabling more researchers to visualize biological knowledge in a precise and unambiguous manner.
+\end{abstract}
+
+\textbf{Keywords:} biological network, SBGN, standard, systems biology, visualization, biological process diagrams, markup language
+
+% Include your PDF document
+\includepdf[pages=-, offset=80 -80]{sbgnml_v3.pdf}
+
+\end{document}

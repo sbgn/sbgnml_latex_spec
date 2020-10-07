@@ -1,0 +1,68 @@
+
+\section{Including color / style information}
+\label{apdx-render}
+
+While SBGNML does not formally define classes and attributes that attach color and rendering information to the \Glyph and \Arc classes of an SBGN \Map, the consensus is, to make use of the SBML Level 3 Render Package \citep{bergmann2018sbml}. This is being done by adding an SBML \token{renderInformation} element as a child of the \token{extension} element of a \Map.  The render information object, then defines a list of colors to be used throughout the document, and its list of styles allows to attach these colors to the \token{id} of children of the \Map.
+
+The example below defines two colors, ``\token{color\_1}'' (to be used as the background color for the glyph) and ``\token{black}'' (to be used as the outline). They are attached to the glyph with id ``\token{sa5}'' via the \token{idList} attribute \token{style} element.
+
+\begin{example}
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.3">
+  <map id="map" language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" 
+        id="renderInformation">
+        
+        <listOfColorDefinitions>
+          <colorDefinition id="color_1" value="#ccffccff"/>
+          <colorDefinition id="black" value="#000000"/>
+        </listOfColorDefinitions>
+        
+        <listOfStyles>
+          <style id="example" idList="sa5">
+            <g stroke="black" stroke-width="2" fill="color_1"/>
+          </style>
+        </listOfStyles>
+      </renderInformation>
+    </extension>
+    <glyph id="sa5" class="macromolecule">
+      <label text="s5"/>
+      <bbox x="90" y="20" w="80" h="40"/>
+    </glyph>
+  </map>
+</sbgn>
+\end{example}
+
+Where the previous example used the \token{idList} in the \textbf{\class{Style}} class to indicate that it applies to a specific \Glyph with that \token{id}, the following example uses a different mechanism. This time the \token{roleList} indicates, that the \textbf{\class{Style}} applies to glyphs with a \token{render:objectRole} attribute.
+
+\begin{example}
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.3"
+  xmlns:render="http://www.sbml.org/sbml/level3/version1/render/version1">
+  <map id="map" language="process description">
+    <extension>
+      <renderInformation
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" 
+        id="renderInformation">
+        
+        <listOfColorDefinitions>
+          <colorDefinition id="color_1" value="#ccffccff"/>
+          <colorDefinition id="black" value="#000000"/>
+        </listOfColorDefinitions>
+        
+        <listOfStyles>
+          <style id="example" roleList="example_style">
+            <g stroke="black" stroke-width="2" fill="color_1"/>
+          </style>
+        </listOfStyles>
+      </renderInformation>
+    </extension>
+    <glyph id="sa5" class="macromolecule" render:objectRole="example_style">
+      <label text="s5"/>
+      <bbox x="90" y="20" w="80" h="40"/>
+    </glyph>
+  </map>
+</sbgn>
+\end{example}

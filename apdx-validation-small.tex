@@ -1,0 +1,27 @@
+% -*- TeX-master: "main"; fill-column: 72 -*-
+
+\section{Validation of SBGN documents}
+\label{apdx-validation-small}
+
+\subsection{Validation and consistency rules}
+\label{validation-rules}
+
+This section summarizes the conditions that must (or in some cases,
+at least \emph{should}) be true of an SBGN document that
+uses the \SystemsBiologyGraphicalNotationMarkupLanguagePackage. There are different degrees of rule strictness. Formally, the differences are expressed in the statement of a rule: either a rule states that a condition \emph{must} be true, or a rule states that it \emph{should} be true. Rules of the former kind are strict SBGN validation rules---a model encoded in SBGN must conform to all of them in order to be considered valid. Rules of the latter kind are consistency rules. 
+
+\subsubsection{Implied Specification Rules}
+
+The rest of this specification document implies basic validation rules. Unless explicitly stated, all validation rules concern objects and their attributes defined specifically in the \SystemsBiologyGraphicalNotationMarkupLanguagePackage.
+
+\subsubsection{Syntax Rules}
+
+SBGN languages can be thought of as bipartite compound graphs with well-defined syntactic rules governing how objects (or constructs) defined by various SBGNML classes can be connected as well as definitions describing an inclusion hierarchy for how objects can be contained via compartments, complexes, and submaps. A reference implementation\footnote{\url{https://github.com/sbgn/libsbgn}} of these rules is enumerated and provided using Schematron\footnote{\url{http://schematron.com}}, a rule-based validation language, that operates as an XML stylesheet applicable to SBGN diagrams encoded as XML-based SBGNML documents. 
+
+\subsubsection{Semantic Rules}
+
+Rules governing the interpretation of SBGN maps are defined in the ``Semantic Rules'' section of each SBGN language specification. Currently, there is no reference implementation for the rules described in these sections. 
+
+\subsubsection{Layout Rules}
+
+Rules governing the visual appearance and aesthetics for SBGN maps are defined in the ``Layout Rules'' section of each SBGN language specification. Currently, there is no reference implementation for the rules described in these sections as aesthetics is a highly subjective area. 
